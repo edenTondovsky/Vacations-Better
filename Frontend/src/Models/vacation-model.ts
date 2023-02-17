@@ -11,6 +11,8 @@ class VacationModel {
     public price: number;
     public imageName: string;
     public image: File;
+    public isFollowing: boolean;
+    public followersCount: number;
 
     //validation for add vacation
     public static destinationValidation: RegisterOptions = {

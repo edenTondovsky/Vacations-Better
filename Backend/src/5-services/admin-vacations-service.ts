@@ -7,14 +7,14 @@ import UserModel from "../4-models/user-model";
 import VacationModel from "../4-models/vacation-model";
 
 async function getAllVacationsForAdmin(user: UserModel): Promise<VacationModel[]> {
-    const sql = "SELECT *, CONCAT( ?, imageName) AS imageUrl FROM vacations ORDER BY startDate";
+    const sql = "SELECT *, CONCAT( ?, imageName) AS imageName FROM vacations ORDER BY startDate";
     const vacations = await dal.execute(sql, appConfig.vacationImagesAddressForAdmin);
     return vacations;
 }
 
 async function getOneVacation(vacationId: number): Promise<VacationModel> {
     const sql = `SELECT vacationId ,destination, description,startDate, endDate, price,
-    CONCAT(?,imageName) AS imageUrl
+    CONCAT(?,imageName) AS imageName
     FROM vacations
     WHERE vacationId = ?`;
     const vacation = await dal.execute(sql, appConfig.vacationImagesAddressForAdmin, vacationId);

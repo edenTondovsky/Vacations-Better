@@ -5,6 +5,10 @@ html, body, #root {
     text-align: center;
     font-size: x-large;
     background-image: linear-gradient(magenta, darkmagenta);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 a {
@@ -20,9 +24,26 @@ a {
     box-shadow: 5px 5px 10px;
 }
 
+
+
 form {
-    width: 420px;
+    display: inline-block;
+    width: 440px;
+    height: 550px;
     text-align: left;
+    border: 2px solid;
+    margin: 5px;
+    margin-top: 0px;
+    padding: 10px;
+    border-color: rgb(236, 29, 74);
+    border-radius: 25px;
+    box-shadow: 10px 5px 8px lightyellow;
+    opacity: 0.8;
+    background-color: cornsilk;
+    color: black;
+    flex-wrap: initial;
+    text-align: center;
+    font-size: 17px;
 }
 
 
@@ -42,4 +63,8 @@ form > label {
     position:absolute;
     font-size: x-large;
     margin: 0 20px;
+}
+img{
+    height: 40px;
+    width: 40px;
 }

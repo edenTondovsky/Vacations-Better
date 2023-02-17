@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import VacationModel from "../../../Models/vacation-model";
@@ -9,9 +9,10 @@ import "./EditVacation.css";
 function EditVacation(): JSX.Element {
 
     const { register, handleSubmit, formState, setValue } = useForm<VacationModel>();
-    // const [vacation, setVacation] = useState<VacationModel>();
+    const [startDate, setStartDate] = useState(new Date());
     const navigate = useNavigate();
     const params = useParams();
+
 
     
 
@@ -22,10 +23,19 @@ function EditVacation(): JSX.Element {
                 setValue("destination",vacation.destination );
                 setValue("description", vacation.description);
                 setValue("price", vacation.price);
-                setValue("startDate", vacation.startDate);
-                setValue("endDate", vacation.endDate);
+                
+                
+                ///
+                const startDate = new Date(vacation.startDate);
+                startDate.setDate(startDate.getDate()+1);
+                const dateForSetValue = startDate.toISOString().substring(0,10);
+                setValue("startDate", dateForSetValue);
+                ///
+                const endDate = new Date(vacation.startDate);
+                endDate.setDate(startDate.getDate()+1);
+                const endDateForSetValue = startDate.toISOString().substring(0,10);
+                setValue("endDate", endDateForSetValue);
                 setValue("image", vacation.image);
-                // setVacation(vacation);
             })
             .catch(err => notify.error(err));
     }, []);
@@ -55,8 +65,13 @@ function EditVacation(): JSX.Element {
         return "";
     }
 
+     // validate start date must be before end date
+     const validateEndDate = (args: ChangeEvent<HTMLInputElement>) => {
+        setStartDate(args.target.valueAsDate);
+    };
+
     return (
-        <div className="EditVacation Box">
+        <div className="EditVacation">
 
             <h2> Edit Vacation </h2>
 
@@ -78,11 +93,11 @@ function EditVacation(): JSX.Element {
                 <span className="Err">{formState.errors.price?.message}</span>
 
                 <label>Start Date</label>
-                <input type="date" min={new Date().toISOString().slice(0, -8)} { ...register("startDate")} required />
+                <input type="date" min={new Date().toISOString().substring(0,10)}  onChange={validateEndDate} {...register("startDate")} required />
                 <span className="Err">{formState.errors.startDate?.message}</span>
 
                 <label>End Date</label>
-                <input type="date" {...register("endDate")} required />
+                <input type="date" min={startDate.toISOString().substring(0, 10)} {...register("endDate")} required />
                 <span className="Err">{formState.errors.endDate?.message}</span>
 
                 <label>Image</label>

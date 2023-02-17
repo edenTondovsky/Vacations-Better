@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import VacationModel from "../../../Models/vacation-model";
@@ -10,41 +11,34 @@ function AddVacation(): JSX.Element {
 
     const { register, handleSubmit, formState } = useForm<VacationModel>();
     const navigate = useNavigate();
+    const [startDate, setStartDate] = useState(new Date());
 
 
     async function send(vacation: VacationModel) {
         try {
-            const err = validateDate(vacation.startDate, vacation.endDate);
-            if (err) {
-                notify.error(err)
-                return;
-            }
-            else {
-                vacation.image = (vacation.image as unknown as FileList)[0];
-                await adminVacationService.addVacation(vacation);
-                notify.success("Vacation has been added");
-                navigate("/vacations");
-            }
+            vacation.image = (vacation.image as unknown as FileList)[0];
+            await adminVacationService.addVacation(vacation);
+            notify.success("Vacation has been added");
+            navigate("/vacations");
         }
         catch (err) {
             notify.error(err);
         }
     }
 
-    const validateDate = (startDate: string, endDate: string) => {
-        if (new Date(endDate) < new Date(startDate)) {
-            return "End time cannot be before start time.";
-        }
-        return "";
-    }
- 
+
+    // validate start date must be before end date
+    const validateEndDate = (args: ChangeEvent<HTMLInputElement>) => {
+        setStartDate(args.target.valueAsDate);
+    };
+
 
     return (
-        <div className="AddVacation Box">
+        <div className="AddVacation">
 
-            <h2>Add vacation</h2>
 
             <form onSubmit={handleSubmit(send)}>
+            <h2>Add vacation</h2>
 
                 <label>Destination</label>
                 <input type="text" {...register("destination", VacationModel.destinationValidation)}></input>
@@ -59,18 +53,19 @@ function AddVacation(): JSX.Element {
                 <span className="Err">{formState.errors.price?.message}</span>
 
                 <label>Start Date</label>
-                <input type="date" min={new Date().toISOString().slice(0, -8)} {...register("startDate")} required  />
+                <input type="date" min={new Date().toISOString().substring(0,10)}  onChange={validateEndDate} {...register("startDate")} required />
                 <span className="Err">{formState.errors.startDate?.message}</span>
 
                 <label>End Date</label>
-                <input type="date" {...register("endDate")} required />
+                <input type="date" min={startDate.toISOString().substring(0, 10)} {...register("endDate")} required />
                 <span className="Err">{formState.errors.endDate?.message}</span>
 
                 <label>Image</label>
                 <input type="file" accept="image/*" {...register("image", VacationModel.imageValidation)}></input>
                 <span className="Err">{formState.errors.image?.message}</span>
-            
-            <button>Send</button>
+
+                <button>Send</button>
+
             </form>
 
         </div>
