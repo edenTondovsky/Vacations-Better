@@ -13,27 +13,22 @@ function EditVacation(): JSX.Element {
     const navigate = useNavigate();
     const params = useParams();
 
-
-    
-
     useEffect(() => {
         adminVacationService.getOneVacation(+params.vacationId)
-            .then(vacation => {                
+            .then(vacation => {
                 setValue("vacationId", vacation.vacationId);
-                setValue("destination",vacation.destination );
+                setValue("destination", vacation.destination);
                 setValue("description", vacation.description);
                 setValue("price", vacation.price);
-                
-                
                 ///
                 const startDate = new Date(vacation.startDate);
-                startDate.setDate(startDate.getDate()+1);
-                const dateForSetValue = startDate.toISOString().substring(0,10);
+                startDate.setDate(startDate.getDate() + 1);
+                const dateForSetValue = startDate.toISOString().substring(0, 10);
                 setValue("startDate", dateForSetValue);
                 ///
                 const endDate = new Date(vacation.startDate);
-                endDate.setDate(startDate.getDate()+1);
-                const endDateForSetValue = startDate.toISOString().substring(0,10);
+                endDate.setDate(startDate.getDate() + 1);
+                const endDateForSetValue = startDate.toISOString().substring(0, 10);
                 setValue("endDate", endDateForSetValue);
                 setValue("image", vacation.image);
             })
@@ -48,11 +43,12 @@ function EditVacation(): JSX.Element {
                 return;
             }
             else {
-            vacation.image = (vacation.image as unknown as FileList)[0];
-            await adminVacationService.updateVacation(vacation);
-            notify.success("Vacation has been update");
-            navigate("/vacations");
-        }}
+                vacation.image = (vacation.image as unknown as FileList)[0];
+                await adminVacationService.updateVacation(vacation);
+                notify.success("Vacation has been update");
+                navigate("/vacations");
+            }
+        }
         catch (err: any) {
             notify.error(err);
         }
@@ -65,8 +61,8 @@ function EditVacation(): JSX.Element {
         return "";
     }
 
-     // validate start date must be before end date
-     const validateEndDate = (args: ChangeEvent<HTMLInputElement>) => {
+    // validate start date must be before end date
+    const validateEndDate = (args: ChangeEvent<HTMLInputElement>) => {
         setStartDate(args.target.valueAsDate);
     };
 
@@ -81,19 +77,19 @@ function EditVacation(): JSX.Element {
                 <input type="hidden" {...register("vacationId")} />
 
                 <label>Destination</label>
-                <input type="text" { ...register("destination", VacationModel.destinationValidation)}></input>
+                <input type="text" {...register("destination", VacationModel.destinationValidation)}></input>
                 <span className="Err">{formState.errors.destination?.message}</span>
 
                 <label>Description:</label>
-                <input type="text" { ...register("description", VacationModel.descriptionValidation)}/>
+                <textarea {...register("description", VacationModel.descriptionValidation)}></textarea>
                 <span className="Err">{formState.errors.description?.message}</span>
-
+                <br />
                 <label>Price</label>
-                <input type="number" step="0.01" { ...register("price", VacationModel.priceValidation)}></input>
+                <input type="number" step="0.01" {...register("price", VacationModel.priceValidation)}></input>
                 <span className="Err">{formState.errors.price?.message}</span>
 
                 <label>Start Date</label>
-                <input type="date" min={new Date().toISOString().substring(0,10)}  onChange={validateEndDate} {...register("startDate")} required />
+                <input type="date" min={new Date().toISOString().substring(0, 10)} onChange={validateEndDate} {...register("startDate")} required />
                 <span className="Err">{formState.errors.startDate?.message}</span>
 
                 <label>End Date</label>
@@ -101,19 +97,12 @@ function EditVacation(): JSX.Element {
                 <span className="Err">{formState.errors.endDate?.message}</span>
 
                 <label>Image</label>
-                <input type="file" accept="image/*" { ...register("image", VacationModel.imageValidation)}></input>
+                <input type="file" accept="image/*" {...register("image", VacationModel.imageValidation)}></input>
                 <span className="Err">{formState.errors.image?.message}</span>
 
                 <button>Edit</button>
 
             </form>
-
-
-
-
-
-
-
         </div>
     );
 }

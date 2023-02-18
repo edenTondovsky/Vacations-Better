@@ -38,26 +38,26 @@ function AddVacation(): JSX.Element {
 
 
             <form onSubmit={handleSubmit(send)}>
-            <h2>Add vacation</h2>
+                <h2>Add vacation</h2>
 
                 <label>Destination</label>
                 <input type="text" {...register("destination", VacationModel.destinationValidation)}></input>
                 <span className="Err">{formState.errors.destination?.message}</span>
 
                 <label>Description:</label>
-                <input type="text" {...register("description", VacationModel.descriptionValidation)}></input>
+                <textarea {...register("description", VacationModel.descriptionValidation)}></textarea>
                 <span className="Err">{formState.errors.description?.message}</span>
-
+                <br />
                 <label>Price</label>
                 <input type="number" step="0.01" {...register("price", VacationModel.priceValidation)}></input>
                 <span className="Err">{formState.errors.price?.message}</span>
 
                 <label>Start Date</label>
-                <input type="date" min={new Date().toISOString().substring(0,10)}  onChange={validateEndDate} {...register("startDate")} required />
+                <input type="date" min={new Date().toISOString().substring(0, 10)} onChange={validateEndDate} {...register("startDate")} required />
                 <span className="Err">{formState.errors.startDate?.message}</span>
 
                 <label>End Date</label>
-                <input type="date" min={startDate.toISOString().substring(0,10)} {...register("endDate")} required />
+                <input type="date" min={startDate.toISOString().substring(0, 10)} {...register("endDate")} required />
                 <span className="Err">{formState.errors.endDate?.message}</span>
 
                 <label>Image</label>

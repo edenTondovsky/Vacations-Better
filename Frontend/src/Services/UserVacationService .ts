@@ -19,7 +19,6 @@ class UserVacationService {
     public async follow(vacationId: number): Promise<void> {
         return axios.post(appConfig.UserFollowUrl + vacationId)
         .then(this.getAllVacationsAndUpdateRedux)
-     
     }
 
     public async unfollow(vacationId: number): Promise<void> {

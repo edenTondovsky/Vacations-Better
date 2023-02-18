@@ -14,7 +14,8 @@ export enum vacationsActionType {
     UpdateVacation = "UpdateVacation",
     DeleteVacation = "DeleteVacation",
     FollowVacation = "FollowVacation",
-    UnFollowVacation = "UnFollowVacation"
+    UnFollowVacation = "UnFollowVacation",
+    DeleteAll = "DeleteAll"
 }
 
 //3. Action - a single describing single operation on data:
@@ -62,6 +63,11 @@ export function vacationsReducer(currentState = new VacationState(), action: vac
                 if(indexToUnFollow >= 0 ){
                     newState.vacations.splice(indexToUnFollow ,1)
                 }
+                break;
+
+                case vacationsActionType.DeleteAll:
+                    newState.vacations = []; 
+
             }
     return newState;
 }

@@ -65,9 +65,9 @@ function VacationsCard(props: VacationsCardProps): JSX.Element {
             <div>
                 Destination: {props.vacation.destination} <br></br>
                 Description: {props.vacation.description} <br></br>
-                price: {props.vacation.price}$ <br></br>
-                startDate: {new Date(props.vacation.startDate).toLocaleDateString("HE-IL").toString()}  <br></br>
-                endDate: {new Date(props.vacation.endDate).toLocaleDateString("HE-IL").toString()} <br></br>
+                Price: {props.vacation.price}$ <br></br>
+                Start Date: {new Date(props.vacation.startDate).toLocaleDateString("HE-IL").toString()}  <br></br>
+                End Date: {new Date(props.vacation.endDate).toLocaleDateString("HE-IL").toString()} <br></br>
 
                 <div>
                     <img src={props.vacation.imageName} /> </div>

@@ -16,8 +16,12 @@ import "./Pagination.css";
 function Pagination(): JSX.Element {
 
     const [vacations, setVacations] = useState<VacationModel[]>([]);
-    const [user, setUser] = useState<UserModel>();
+    const [user, setUser] = useState<UserModel>(authStore.getState().user);
     const vacationsPerPage = 10;
+
+    const [filterFollowed, setFilterFollowed] = useState<boolean>(false);
+    const [hasNotStart, setIsStarted] = useState<boolean>(false);
+    const [isOngoing, setIsOngoing] = useState<boolean>(false);
 
     const [startOffset, setStartOffset] = useState(0);
 
@@ -37,8 +41,23 @@ function Pagination(): JSX.Element {
         setStartOffset(newOffset);
     };
 
+
+
+    function filterVacations(vacations: VacationModel[]): VacationModel[] {
+        if (filterFollowed) {
+            vacations = vacations.filter(v => v.isFollowing);
+        }
+        if (hasNotStart) {
+            vacations = vacations.filter(v => Date.parse(v.startDate) > Date.now());
+        }
+        if (isOngoing) {
+            vacations = vacations.filter(v => Date.parse(v.startDate) <= Date.now() && Date.parse(v.endDate) > Date.now());
+        }
+        return vacations;
+    }
+
+
     useEffect(() => {
-        let user = authStore.getState().user
         if (user && user.role === "Admin") {
             adminVacationService.getAllVacations();
             setVacations(vacationStore.getState().vacations);
@@ -48,31 +67,55 @@ function Pagination(): JSX.Element {
         }
         else {
             userVacationService.getAllVacations()
-            setVacations(vacationStore.getState().vacations);
+            setVacations(filterVacations(vacationStore.getState().vacations));
             vacationStore.subscribe(() => {
-                setVacations(vacationStore.getState().vacations)
+                setVacations(filterVacations(vacationStore.getState().vacations));
             })
         }
-    }, []);
-
-
+    }, [filterFollowed, isOngoing, hasNotStart]);
 
 
     return (
         <>
-          < VacationsList vacations={currentVacations} />
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            previousLabel="< previous"
-            renderOnZeroPageCount={null}
-          />
-          
+            {user?.role === "User" && <div>
+
+                <input type="checkbox" onChange={(e) => {
+                    setFilterFollowed(e.target.checked);
+                    setStartOffset(0);
+                }} />
+                <label>filterFollowed</label>
+
+                <input type="checkbox" onChange={(e) => {
+                    setIsStarted(e.target.checked);
+                    setStartOffset(0);
+                }} />
+                <label>Has not started</label>
+
+                <input type="checkbox" onChange={(e) => {
+                    setIsOngoing(e.target.checked);
+                    setStartOffset(0);
+                }} />
+                <label>isOngoing</label>
+            </div>
+            }
+
+
+
+
+
+
+            < VacationsList vacations={currentVacations} />
+            <ReactPaginate
+                breakLabel=""
+                nextLabel="next"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="previous"
+                renderOnZeroPageCount={null}
+            />
         </>
-      );
-    }
+    );
+}
 
 export default Pagination;

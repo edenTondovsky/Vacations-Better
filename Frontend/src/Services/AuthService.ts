@@ -3,6 +3,7 @@ import { AuthActionType, authStore } from "../Redux/AuthState";
 import CredentialsModel from "../Models/credentials-model";
 import UserModel from "../Models/user-model";
 import appConfig from "../Utils/AppConfig";
+import { vacationsActionType, vacationStore } from "../Redux/VacationState";
 
 class AuthService {
 
@@ -20,10 +21,12 @@ class AuthService {
 
     public logout(): void {
         authStore.dispatch({ type: AuthActionType.Logout });
+        vacationStore.dispatch({ type: vacationsActionType.DeleteAll,payload:"" });
     }
 
     public isLoggedIn(): boolean {
         return authStore.getState().token !== null;
+        
     }
 
 
