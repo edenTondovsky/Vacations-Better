@@ -12,34 +12,8 @@ import AddVacation from "../AddVacation/AddVacation";
 import VacationsCard from "../VacationsCard/VacationsCard";
 import "./VacationsList.css";
 
-
-function VacationsList(): JSX.Element {
-    const [vacations, setVacations] = useState<VacationModel[]>([]);
-
-    const [user, setUser] = useState<UserModel>();
-
-    useEffect(() => {
-        setUser(authStore.getState().user);
-        authStore.subscribe(() => {
-            setUser(authStore.getState().user);
-        })
-    }, []);
-
-    useEffect(() => {
-        let user = authStore.getState().user
-        if (user && user.role === "Admin") {
-            adminVacationService.getAllVacations()
-                .then(vacations => setVacations(vacations))
-                .catch(err => notify.error(err));
-        }
-        else {
-            userVacationService.getAllVacations()
-            setVacations(vacationStore.getState().vacations);
-            vacationStore.subscribe(() => {
-                setVacations(vacationStore.getState().vacations)
-            })
-        }
-    }, []);
+function VacationsList({vacations}:{vacations:VacationModel[]}): JSX.Element {
+        let user = authStore.getState().user;
 
     return (
         <div className="VacationsList">
@@ -50,9 +24,6 @@ function VacationsList(): JSX.Element {
                 <NavLink to="/vacations/new">Add vacation</NavLink>
                 <br />
             </div>}
-
-
-
         </div>
     );
 }

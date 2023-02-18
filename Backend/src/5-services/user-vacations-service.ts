@@ -6,19 +6,19 @@ import UserModel from "../4-models/user-model";
 import VacationModel from "../4-models/vacation-model";
 
 async function getAllVacationsForUser(user: UserModel): Promise<VacationModel[]> {
-   
+
     const sql = `
     SELECT DISTINCT 
     V.vacationId ,destination, description,startDate, endDate, price,
     EXISTS(SELECT * FROM followers WHERE vacationId = F.vacationId AND userId = ?) AS isFollowing,
     COUNT(F.userId) AS followersCount,
-    CONCAT( ?,imageName) AS imageUrl
+    CONCAT( ?,imageName) AS imageName
     FROM vacations AS V LEFT JOIN followers AS F
-ON V.vacationId = F.vacationId
-GROUP BY vacationId
-ORDER BY startDate
+    ON V.vacationId = F.vacationId
+    GROUP BY vacationId
+    ORDER BY startDate
     `;
-    const vacations = await dal.execute(sql,user.userId, appConfig.vacationImagesAddressForUsers);
+    const vacations = await dal.execute(sql, user.userId, appConfig.vacationImagesAddressForUsers);
     return vacations;
 }
 

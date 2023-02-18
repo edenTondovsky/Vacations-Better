@@ -3,7 +3,7 @@ html, body, #root {
     padding-top: 5px;
     height: 100%;
     text-align: center;
-    font-size: x-large;
+    font-size: large;
     background-image: linear-gradient(magenta, darkmagenta);
     background-repeat:no-repeat;
     background-position: center;

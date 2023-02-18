@@ -15,34 +15,38 @@ class AdminVacationService {
         return vacations
     }
 
-    public async addVacation(vacation: VacationModel): Promise < void > {
-    const headers = { "Content-type": "multipart/form-data" }; // Tell axios that we sending text and file to backend
-    const response = await axios.post<VacationModel>(appConfig.AdminVacationsUrl, vacation, { headers });
-    const addedVacation = response.data;
-    return this.getAllVacationsAndUpdateRedux();
-}
+    public async addVacation(vacation: VacationModel): Promise<void> {
+        const headers = { "Content-type": "multipart/form-data" }; // Tell axios that we sending text and file to backend
+        const response = await axios.post<VacationModel>(appConfig.AdminVacationsUrl, vacation, { headers });
+        const addedVacation = response.data;
+        return this.getAllVacationsAndUpdateRedux();
+    }
 
 
-    public async updateVacation(vacation: VacationModel): Promise < void > {
-    const headers = { "Content-type": "multipart/form-data" }; // Te;; axios that we sending text and file to backend
-    const response = await axios.put<VacationModel>(appConfig.AdminVacationsUrl + vacation.vacationId, vacation, { headers });
-    const updatedVacation = response.data;
-    return this.getAllVacationsAndUpdateRedux();
-}
+    public async updateVacation(vacation: VacationModel): Promise<void> {
+        const headers = { "Content-type": "multipart/form-data" }; // Tell axios that we sending text and file to backend
+        const response = await axios.put<VacationModel>(appConfig.AdminVacationsUrl + vacation.vacationId, vacation, { headers });
+        const updatedVacation = response.data;
+        return this.getAllVacationsAndUpdateRedux();
+    }
 
-    public async getOneVacation(vacationId: number): Promise < VacationModel > {
-    const response = await axios.get<VacationModel>(appConfig.AdminVacationsUrl + vacationId);
-    const vacation = response.data;
-    return vacation;
+    public async getOneVacation(vacationId: number): Promise<VacationModel> {
+        const response = await axios.get<VacationModel>(appConfig.AdminVacationsUrl + vacationId);
+        const vacation = response.data;
+        return vacation;
+    }
 
-}
+    public async getAllVacationsAndUpdateRedux(): Promise<void> {
+        const response = await axios.get<VacationModel[]>(appConfig.AdminVacationsUrl);
+        let vacations = response.data;
+        vacationStore.dispatch({ type: vacationsActionType.FetchVacations, payload: vacations });
+    }
 
-public async getAllVacationsAndUpdateRedux():Promise<void> {
-    const response = await axios.get<VacationModel[]>(appConfig.AdminVacationsUrl);
-    let vacations = response.data;
-    vacationStore.dispatch({ type: vacationsActionType.FetchVacations, payload: vacations });
-}
-
+    public async deleteVacation(vacationId: number): Promise<void> {
+        await axios.delete(appConfig.AdminVacationsUrl + vacationId);
+        vacationStore.dispatch({ type: vacationsActionType.DeleteVacation, payload: vacationId });
+        return this.getAllVacationsAndUpdateRedux();
+    }
 }
 
 const adminVacationService = new AdminVacationService();

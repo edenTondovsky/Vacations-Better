@@ -57,7 +57,7 @@ function AddVacation(): JSX.Element {
                 <span className="Err">{formState.errors.startDate?.message}</span>
 
                 <label>End Date</label>
-                <input type="date" min={startDate.toISOString().substring(0, 10)} {...register("endDate")} required />
+                <input type="date" min={startDate.toISOString().substring(0,10)} {...register("endDate")} required />
                 <span className="Err">{formState.errors.endDate?.message}</span>
 
                 <label>Image</label>
