@@ -43,9 +43,9 @@ private static putValidationSchema = Joi.object({
     description: Joi.string().required().min(2).max(1000),
     startDate: Joi.date().required(),
     endDate: Joi.date().required(),
-    price: Joi.number().positive().min(0).max(20000),
+    price: Joi.number().required().positive().min(0).max(20000),
     imageName: Joi.string().forbidden(),
-    image: Joi.object().required()
+    image: Joi.object().optional()
 });
 
 //Function for use POST validate

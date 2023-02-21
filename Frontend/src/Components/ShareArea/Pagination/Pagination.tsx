@@ -1,7 +1,8 @@
+import { Button, Checkbox } from '@mui/material';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import UserModel from '../../../Models/user-model';
 import VacationModel from '../../../Models/vacation-model';
 import { authStore } from '../../../Redux/AuthState';
@@ -9,6 +10,7 @@ import { vacationStore } from '../../../Redux/VacationState';
 import adminVacationService from '../../../Services/AdminVacationService';
 import userVacationService from '../../../Services/UserVacationService ';
 import VacationsList from '../../VacationsArea/VacationsList/VacationsList';
+
 import "./Pagination.css";
 
 
@@ -17,13 +19,15 @@ function Pagination(): JSX.Element {
 
     const [vacations, setVacations] = useState<VacationModel[]>([]);
     const [user, setUser] = useState<UserModel>(authStore.getState().user);
-    const vacationsPerPage = 10;
+    const navigate = useNavigate();
 
     const [filterFollowed, setFilterFollowed] = useState<boolean>(false);
     const [hasNotStart, setIsStarted] = useState<boolean>(false);
     const [isOngoing, setIsOngoing] = useState<boolean>(false);
-
+    
+    
     const [startOffset, setStartOffset] = useState(0);
+    const vacationsPerPage = 10;
 
     //find last index per page
     const endOffset = startOffset + vacationsPerPage;
@@ -42,7 +46,7 @@ function Pagination(): JSX.Element {
     };
 
 
-
+    //filtered Vacation for user
     function filterVacations(vacations: VacationModel[]): VacationModel[] {
         if (filterFollowed) {
             vacations = vacations.filter(v => v.isFollowing);
@@ -56,7 +60,7 @@ function Pagination(): JSX.Element {
         return vacations;
     }
 
-
+    //handle vacation State and refresh
     useEffect(() => {
         if (user && user.role === "Admin") {
             adminVacationService.getAllVacations();
@@ -75,37 +79,46 @@ function Pagination(): JSX.Element {
     }, [filterFollowed, isOngoing, hasNotStart]);
 
 
+    useEffect(() => {
+        if(!authStore.getState().user) {
+            navigate("/home");
+        }
+        setUser(authStore.getState().user)
+    }, []);
+
     return (
         <>
             {user?.role === "User" && <div>
-
-                <input type="checkbox" onChange={(e) => {
+                <Checkbox onChange={(e) => {
                     setFilterFollowed(e.target.checked);
                     setStartOffset(0);
                 }} />
-                <label>filterFollowed</label>
+                <label>Followed Vacations</label>
 
-                <input type="checkbox" onChange={(e) => {
+                <Checkbox onChange={(e) => {
                     setIsStarted(e.target.checked);
                     setStartOffset(0);
                 }} />
-                <label>Has not started</label>
+                <label>Has Not Started</label>
 
-                <input type="checkbox" onChange={(e) => {
+                <Checkbox onChange={(e) => {
                     setIsOngoing(e.target.checked);
                     setStartOffset(0);
                 }} />
-                <label>isOngoing</label>
+                <label>Is On Going</label>
             </div>
             }
 
-
-
-
-
+            {user?.role === "Admin" && <div className="addLink">
+                <NavLink to="/vacations/new">
+                    <Button variant="contained">Add vacation</Button>
+                </NavLink>
+                <br />
+            </div>}
 
             < VacationsList vacations={currentVacations} />
-            <ReactPaginate
+
+            <ReactPaginate className='pagination'
                 breakLabel=""
                 nextLabel="next"
                 onPageChange={handlePageClick}
@@ -113,6 +126,7 @@ function Pagination(): JSX.Element {
                 pageCount={pageCount}
                 previousLabel="previous"
                 renderOnZeroPageCount={null}
+
             />
         </>
     );

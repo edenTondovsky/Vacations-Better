@@ -1,13 +1,16 @@
-html, body, #root {
+html,
+body,
+#root {
     margin: 0;
     padding-top: 5px;
     height: 100%;
+    width: 100%;
     text-align: center;
     font-size: large;
-    background-image: linear-gradient(magenta, darkmagenta);
-    background-repeat:no-repeat;
-    background-position: center;
+    background-image: url("Assets/Images/background.png");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     background-attachment: fixed;
 }
 
@@ -24,47 +27,49 @@ a {
     box-shadow: 5px 5px 10px;
 }
 
-
-
 form {
     display: inline-block;
-    width: 440px;
-    height: 550px;
+    width: 420px;
+    height: 520px;
     text-align: left;
     border: 2px solid;
     margin: 5px;
     margin-top: 0px;
     padding: 10px;
-    border-color: rgb(236, 29, 74);
+    border-color: white;
     border-radius: 25px;
     box-shadow: 10px 5px 8px lightyellow;
     opacity: 0.8;
     background-color: cornsilk;
     color: black;
     flex-wrap: initial;
-    text-align: center;
     font-size: 17px;
 }
 
 
-form > input, form > button {
+form>input,
+form>button {
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 20px;
     font-size: large;
 }
 
-form > label {
+form>label {
     font-size: large;
+}
+
+form>h2 {
+    text-align: center;
 }
 
 .Err {
     color: red;
-    position:absolute;
+    font-weight: bolder;
+    border-bottom: 1px solid;
+    position: absolute;
     font-size: x-large;
-    margin: 0 20px;
+    margin: 0 10px;
+    background-color: whitesmoke;
 }
-img{
-    height: 40px;
-    width: 40px;
-}
+

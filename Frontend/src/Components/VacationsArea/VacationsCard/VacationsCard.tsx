@@ -7,6 +7,10 @@ import { authStore } from "../../../Redux/AuthState";
 import adminVacationService from "../../../Services/AdminVacationService";
 import userVacationService from "../../../Services/UserVacationService ";
 import notify from "../../../Utils/Notify";
+import Checkbox from '@mui/material/Checkbox';
+import { pink } from '@mui/material/colors';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 import "./VacationsCard.css";
 
 interface VacationsCardProps {
@@ -63,15 +67,15 @@ function VacationsCard(props: VacationsCardProps): JSX.Element {
         <div className="VacationsCard Box">
 
             <div>
+                <div>
+                    <img src={props.vacation.imageName} /> </div>
+            </div>
                 Destination: {props.vacation.destination} <br></br>
                 Description: {props.vacation.description} <br></br>
                 Price: {props.vacation.price}$ <br></br>
                 Start Date: {new Date(props.vacation.startDate).toLocaleDateString("HE-IL").toString()}  <br></br>
                 End Date: {new Date(props.vacation.endDate).toLocaleDateString("HE-IL").toString()} <br></br>
 
-                <div>
-                    <img src={props.vacation.imageName} /> </div>
-            </div>
 
 
             {user?.role === "Admin" && <div className="addVacationLink">
@@ -80,10 +84,18 @@ function VacationsCard(props: VacationsCardProps): JSX.Element {
                 <br />
             </div>}
 
-
-
             {user?.role === "User" && <div className="followDiv">
-                <input type="checkbox" onChange={handleFollowChange} defaultChecked={isVacationFollowed} />
+                <Checkbox onChange={handleFollowChange} defaultChecked={isVacationFollowed} 
+                
+                sx={{
+                  color: pink[800],
+                  '&.Mui-checked': {
+                    color: pink[600],
+                  },}}
+                
+                  icon={<FavoriteBorder />} checkedIcon={<Favorite />}
+                />
+               
                 {props.vacation.followersCount}
             </div>
             }
@@ -91,7 +103,6 @@ function VacationsCard(props: VacationsCardProps): JSX.Element {
         </div>
     );
 }
-
 
 
 export default VacationsCard;

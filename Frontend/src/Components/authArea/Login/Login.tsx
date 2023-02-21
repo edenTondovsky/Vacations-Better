@@ -1,14 +1,16 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import RestoreIcon from '@mui/icons-material/Restore';
+import { NavLink, useNavigate } from "react-router-dom";
 import CredentialsModel from "../../../Models/credentials-model";
 import authService from "../../../Services/AuthService";
 import notify from "../../../Utils/Notify";
 import "./Login.css";
+import { BottomNavigationAction } from "@mui/material";
 
 function Login(): JSX.Element {
 
     const { register, handleSubmit, formState } = useForm<CredentialsModel>();
-    
+
     const navigate = useNavigate();
 
     async function send(credentials: CredentialsModel) {
@@ -39,6 +41,9 @@ function Login(): JSX.Element {
 
                 <button>Log in</button>
 
+                <NavLink to="/home">
+                    <BottomNavigationAction label="Back" icon={<RestoreIcon />} />
+                </NavLink>
             </form>
 
         </div>

@@ -1,3 +1,13 @@
 .Home {
-	
+	color: whitesmoke;  
+}
+  
+.Home > .alreadyRegisterDiv {
+    margin-top:300px;
+    font-size: x-large;
+}
+
+.Home > .registerFirstDiv {
+    margin-top: 50px;
+    font-size: xx-large;
 }

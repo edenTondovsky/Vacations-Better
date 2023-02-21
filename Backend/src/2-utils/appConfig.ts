@@ -1,6 +1,6 @@
 class AppConfig {
 
-    public port = 4000;
+    public port = 4001;
     public mysqlHost = "localhost";
     public mysqlUser = "root";
     public mysqlPassword = "";

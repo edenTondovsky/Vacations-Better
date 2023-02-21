@@ -18,7 +18,7 @@ async function getOneVacation(vacationId: number): Promise<VacationModel> {
     FROM vacations
     WHERE vacationId = ?`;
     const vacation = await dal.execute(sql, appConfig.vacationImagesAddressForAdmin, vacationId);
-    
+
     return vacation[0];
 }
 

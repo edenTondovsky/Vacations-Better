@@ -30,8 +30,16 @@ class VacationModel {
     public static priceValidation: RegisterOptions = {
         required: { value: true, message: "Missing price" },
         min: { value: 0, message: "Price can't be negative" },
-        max: { value: 20000, message: "Price can't exceeds 20000" }
+        max: { value: 10000, message: "Price can't exceeds 10000" }
     };
+
+    public static startDateValidation: RegisterOptions = {
+        required: { value: true, message: "Missing Start Date" }
+    }
+
+    public static endDateValidation: RegisterOptions = {
+        required: { value: true, message: "Missing End Date" }
+    }
 
     public static imageValidation: RegisterOptions = {
         required: { value: true, message: "Missing image" }

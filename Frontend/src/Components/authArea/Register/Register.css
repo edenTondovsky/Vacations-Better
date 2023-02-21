@@ -1,3 +1,19 @@
-.Register {
-	
+.Register > form {
+    display: inline-block;
+    width: 300px;
+    height: 400px;
+    text-align: left;
+    border: 2px solid;
+    margin: 5px;
+    margin-top: 0px;
+    padding: 10px;
+    border-color: white;
+    border-radius: 25px;
+    box-shadow: 10px 5px 8px black;
+    opacity: 0.8;
+    background-color: cornsilk;
+    color: black;
+    flex-wrap: initial;
+    font-size: 17px;
 }
+

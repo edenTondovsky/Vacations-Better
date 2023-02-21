@@ -24,21 +24,11 @@ function AuthMenu(): JSX.Element {
 
     return (
         <div className="AuthMenu">
-            {!user && <>
-
-                <h2>For using website please Register </h2>
-                <br />
-                <NavLink to="/register">register</NavLink>
-                <br />
-                <br />
-                <span>registered user ?</span>
-                <br />
-                <NavLink to="/login">login</NavLink>
-
-            </>}
+           
 
             {user && <>
                 <span>Hello {user.firstName} {user.lastName}</span>
+                <br/>
                 <NavLink to="/home" onClick={logout}>Logout</NavLink>
             </>}
 

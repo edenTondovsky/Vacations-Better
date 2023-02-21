@@ -6,7 +6,7 @@ import userVacationsService from "../5-services/user-vacations-service";
 
 const router = express.Router();
 
-// Get http://localhost:4000/api//users/vacations
+// Get http://localhost:4001/api//users/vacations
 router.get("/user/vacations", verifyLoggedIn,  async (request: Request, response: Response, next: NextFunction) => {
     try {
         const user = cyber.getUserFromToken(request);
@@ -21,7 +21,7 @@ router.get("/user/vacations", verifyLoggedIn,  async (request: Request, response
 
 
 // User Follow vacation
-// POST http://localhost:4000/api//users/follow/:vacationId
+// POST http://localhost:4001/api//users/follow/:vacationId
 router.post("/user/follow/:vacationId([0-9]+)", verifyLoggedIn,  async (request: Request, response: Response, next: NextFunction) => {
     try {
         const user = cyber.getUserFromToken(request);
@@ -35,7 +35,7 @@ router.post("/user/follow/:vacationId([0-9]+)", verifyLoggedIn,  async (request:
 });
 
 //User Unfollow vacation
-// DELETE http://localhost:4000/api//users/follow/:vacationId
+// DELETE http://localhost:4001/api//users/follow/:vacationId
 router.delete("/user/follow/:vacationId([0-9]+)", verifyLoggedIn,  async (request: Request, response: Response, next: NextFunction) => {
     try {
         const user = cyber.getUserFromToken(request);
@@ -49,7 +49,7 @@ router.delete("/user/follow/:vacationId([0-9]+)", verifyLoggedIn,  async (reques
     }
 });
 
-// GET http://localhost:4000/api/admin/vacations/images/:imageName
+// GET http://localhost:4001/api/admin/vacations/images/:imageName
 router.get("/user/vacations/images/:imageName", async (request: Request, response: Response, next: NextFunction) => {
     try {
         const imageName = request.params.imageName;

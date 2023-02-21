@@ -1,4 +1,7 @@
+import { BottomNavigationAction, Button } from "@mui/material";
+import RestoreIcon from '@mui/icons-material/Restore';
 import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import authService from "../../../Services/AuthService";
@@ -25,12 +28,12 @@ function Register(): JSX.Element {
         <div className="Register">
             <h2>Register </h2>
 
-            <form onSubmit={handleSubmit(send)}>  
+            <form onSubmit={handleSubmit(send)}>
 
-            <label>First Name:</label>
+                <label>First Name:</label>
                 <input type="text" {...register("firstName", UserModel.firstNameValidation)} />
                 <span className="Err">{formState.errors.firstName?.message}</span>
-                
+
                 <label>Last Name:</label>
                 <input type="text" {...register("lastName", UserModel.lastNameValidation)} />
                 <span className="Err">{formState.errors.lastName?.message}</span>
@@ -43,7 +46,12 @@ function Register(): JSX.Element {
                 <input type="password" {...register("password", UserModel.passwordValidation)} />
                 <span className="Err">{formState.errors.password?.message}</span>
 
-                <button>register</button>
+
+                <button>Register</button>
+
+                <NavLink to="/home">
+                    <BottomNavigationAction label="Back" icon={<RestoreIcon />} />
+                </NavLink>
             </form>
 
 

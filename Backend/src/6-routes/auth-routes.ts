@@ -6,7 +6,7 @@ import authService from "../5-services/auth-service";
 
 const router = express.Router(); // Capital R
 
-// POST http://localhost:4000/api/auth/register
+// POST http://localhost:4001/api/auth/register
 router.post("/auth/register", async (request: Request, response: Response, next: NextFunction) => {
     try {
         const user = new UserModel(request.body);
@@ -18,7 +18,7 @@ router.post("/auth/register", async (request: Request, response: Response, next:
     }
 })
 
-// POST http://localhost:4000/api/auth/register
+// POST http://localhost:4001/api/auth/register
 router.post("/auth/login", async (request: Request, response: Response, next: NextFunction) => {
     try {
         const credentials = new CredentialsModel(request.body);

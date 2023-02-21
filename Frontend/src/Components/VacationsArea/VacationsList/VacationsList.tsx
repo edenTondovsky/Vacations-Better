@@ -15,15 +15,13 @@ import "./VacationsList.css";
 function VacationsList({vacations}:{vacations:VacationModel[]}): JSX.Element {
         let user = authStore.getState().user;
 
+
     return (
         <div className="VacationsList">
 
             {vacations.map(v => <VacationsCard key={v.vacationId} vacation={v} />)}
 
-            {user?.role === "Admin" && <div className="addLink">
-                <NavLink to="/vacations/new">Add vacation</NavLink>
-                <br />
-            </div>}
+          
         </div>
     );
 }
