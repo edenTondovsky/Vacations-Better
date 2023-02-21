@@ -47,7 +47,7 @@ function EditVacation(): JSX.Element {
                 return;
             }
             else {
-                vacation.image = (vacation.image as unknown as FileList)[0];
+                vacation.image = vacation.image && (vacation.image as unknown as FileList)[0];
                 await adminVacationService.updateVacation(vacation);
                 notify.success("Vacation has been update");
                 navigate("/vacations");
@@ -100,7 +100,7 @@ function EditVacation(): JSX.Element {
                 <span className="Err">{formState.errors.endDate?.message}</span>
 
                 <label>Image</label>
-                <input type="file" accept="image/*" {...register("image")}></input>
+                <input className="imageEdit" type="file" accept="image/*" {...register("image")}></input>
                 <span className="Err">{formState.errors.image?.message}</span>
 
                 <img src={vacation?.imageName}/>
