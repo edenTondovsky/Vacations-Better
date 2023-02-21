@@ -11,10 +11,10 @@ import "./EditVacation.css";
 function EditVacation(): JSX.Element {
 
     const { register, handleSubmit, formState, setValue } = useForm<VacationModel>();
-    const [vacation, setVacation] = useState<VacationModel>();
     const [startDate, setStartDate] = useState(new Date());
     const navigate = useNavigate();
     const params = useParams();
+    const [vacation, setVacation] = useState<VacationModel>();
 
     useEffect(() => {
         adminVacationService.getOneVacation(+params.vacationId)
@@ -102,7 +102,6 @@ function EditVacation(): JSX.Element {
                 <label>Image</label>
                 <input type="file" accept="image/*" {...register("image")}></input>
                 <span className="Err">{formState.errors.image?.message}</span>
-
 
                 <img src={vacation?.imageName}/>
 

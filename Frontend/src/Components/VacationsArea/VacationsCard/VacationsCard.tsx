@@ -1,5 +1,4 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { ChangeHandler } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
@@ -64,19 +63,27 @@ function VacationsCard(props: VacationsCardProps): JSX.Element {
 
 
     return (
-        <div className="VacationsCard Box">
+        <div className="VacationsCard">
 
             <div>
                 <div>
-                    <img src={props.vacation.imageName} /> </div>
+                    <img className="imageCard" src={props.vacation.imageName} /> </div>
             </div>
-                Destination: {props.vacation.destination} <br></br>
-                Description: {props.vacation.description} <br></br>
-                Price: {props.vacation.price}$ <br></br>
-                Start Date: {new Date(props.vacation.startDate).toLocaleDateString("HE-IL").toString()}  <br></br>
-                End Date: {new Date(props.vacation.endDate).toLocaleDateString("HE-IL").toString()} <br></br>
 
+            <div className="destnationProp">
+                {props.vacation.destination} <br></br>
+            </div>
+            <div className="priceProp">
+                {props.vacation.price}$ <br></br>
+            </div>
+            <div className="DateProp">
+                {new Date(props.vacation.startDate).toLocaleDateString("HE-IL").toString()}
+                {new Date(props.vacation.endDate).toLocaleDateString("HE-IL").toString()} <br></br>
+            </div>
 
+            <div className="descriptionProp">
+                {props.vacation.description} <br></br>
+            </div>
 
             {user?.role === "Admin" && <div className="addVacationLink">
                 <NavLink to={"/vacations/edit/" + props.vacation.vacationId}>✏️</NavLink>
@@ -84,22 +91,20 @@ function VacationsCard(props: VacationsCardProps): JSX.Element {
                 <br />
             </div>}
 
-            {user?.role === "User" && <div className="followDiv">
-                <Checkbox onChange={handleFollowChange} defaultChecked={isVacationFollowed} 
-                
-                sx={{
-                  color: pink[800],
-                  '&.Mui-checked': {
-                    color: pink[600],
-                  },}}
-                
-                  icon={<FavoriteBorder />} checkedIcon={<Favorite />}
-                />
-               
-                {props.vacation.followersCount}
-            </div>
-            }
-
+            <div className="followCard">
+                {user?.role === "User" && <div className="followDiv">
+                    <Checkbox onChange={handleFollowChange} defaultChecked={isVacationFollowed}
+                        sx={{
+                            color: pink[800],
+                            '&.Mui-checked': {
+                                color: pink[600],
+                            },
+                        }}
+                        icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                    {props.vacation.followersCount}
+                </div>
+                }
+            </div >
         </div>
     );
 }
