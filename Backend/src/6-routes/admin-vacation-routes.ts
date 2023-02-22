@@ -19,7 +19,7 @@ router.get("/admin/vacations", verifyAdmin, async (request: Request, response: R
     }
 });
 // Get http://localhost:4001/api/admin/vacations/:vacationId
-router.get("/admin/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
+router.get("/admin/vacations/:vacationId([0-9]+)", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const vacationId = +request.params.vacationId;
         const vacations = await adminVacationsService.getOneVacation(vacationId);
@@ -81,6 +81,18 @@ router.get("/admin/vacations/images/:imageName", async (request: Request, respon
         next(err);
     }
 });
+
+// GET http://localhost:4001/api/admin/vacations/reports
+router.get("/admin/vacations/reports", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const report = await adminVacationsService.getReport();
+        response.json(report);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
 
 
 export default router;

@@ -3,21 +3,34 @@ import appConfig from "../2-utils/appConfig";
 import dal from "../2-utils/dal";
 import imageHandler from "../2-utils/image-handler";
 import { ResourceNotFoundError } from "../4-models/client-errors";
+import ReportModel from "../4-models/report-model";
 import UserModel from "../4-models/user-model";
 import VacationModel from "../4-models/vacation-model";
 
+
+// Get all vacations
 async function getAllVacationsForAdmin(user: UserModel): Promise<VacationModel[]> {
-    const sql = "SELECT *, CONCAT( ?, imageName) AS imageName FROM vacations ORDER BY startDate";
+
+    // Create sql query and execute
+    const sql = `SELECT *, CONCAT( ?, imageName) AS imageName FROM vacations ORDER BY startDate`;
     const vacations = await dal.execute(sql, appConfig.vacationImagesAddressForAdmin);
+
+    // Return vacations
     return vacations;
 }
 
+
 async function getOneVacation(vacationId: number): Promise<VacationModel> {
+    console.log("-------------------------------------");
+    console.log(vacationId);
+    
+    console.log("-------------------------------------");
+    
     const sql = `SELECT vacationId ,destination, description,startDate, endDate, price,
     CONCAT(?,imageName) AS imageName
     FROM vacations
     WHERE vacationId = ?`;
-    const vacation = await dal.execute(sql, appConfig.vacationImagesAddressForAdmin, vacationId);
+    const vacation = await dal.execute(sql, appConfig.vacationImagesAddressForAdmin , vacationId);
 
     return vacation[0];
 }
@@ -81,10 +94,32 @@ async function deleteVacation(vacationId: number) {
     if (result.affectedRows === 0) throw new ResourceNotFoundError(vacationId);
 }
 
+// Get followers and destinations for admin report
+async function getReport(): Promise<ReportModel[]> {
+
+    // query for what is needed for report
+    const sql = `
+    SELECT DISTINCT
+        V.destination,
+        COUNT(F.userId) AS followersCount
+    FROM vacations AS V LEFT JOIN followers AS F
+    ON V.vacationId = F.vacationId
+    GROUP BY V.vacationId
+    `;
+
+    // get report using dal
+    const report = await dal.execute(sql);
+
+    // return admin report
+    return report;
+}
+
+
 export default {
     getAllVacationsForAdmin,
     getOneVacation,
     addVacation,
     updateVacation,
-    deleteVacation
+    deleteVacation,
+    getReport
 }

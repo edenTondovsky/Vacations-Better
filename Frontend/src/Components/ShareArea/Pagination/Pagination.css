@@ -1,3 +1,10 @@
-.Pagination {
-	
+.pagination {
+    list-style: none;
+}
+.pagination li {
+    display: inline-block;
+    background-color: #EEE;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
 }

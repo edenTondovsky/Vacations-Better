@@ -10,7 +10,6 @@ import { vacationStore } from '../../../Redux/VacationState';
 import adminVacationService from '../../../Services/AdminVacationService';
 import userVacationService from '../../../Services/UserVacationService ';
 import VacationsList from '../../VacationsArea/VacationsList/VacationsList';
-
 import "./Pagination.css";
 
 
@@ -77,6 +76,7 @@ function Pagination(): JSX.Element {
             })
         }
     }, [filterFollowed, isOngoing, hasNotStart]);
+console.log(vacations);
 
 
     useEffect(() => {
@@ -118,7 +118,9 @@ function Pagination(): JSX.Element {
 
             < VacationsList vacations={currentVacations} />
 
-            <ReactPaginate className='pagination'
+
+
+            <ReactPaginate
                 breakLabel=""
                 nextLabel="next"
                 onPageChange={handlePageClick}
@@ -126,6 +128,8 @@ function Pagination(): JSX.Element {
                 pageCount={pageCount}
                 previousLabel="previous"
                 renderOnZeroPageCount={null}
+                containerClassName="pagination"
+                activeClassName="active"
 
             />
         </>

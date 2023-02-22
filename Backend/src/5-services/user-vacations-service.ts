@@ -10,7 +10,7 @@ async function getAllVacationsForUser(user: UserModel): Promise<VacationModel[]>
     const sql = `
     SELECT DISTINCT 
     V.vacationId ,destination, description,startDate, endDate, price,
-    EXISTS(SELECT * FROM followers WHERE vacationId = F.vacationId AND userId = ?) AS isFollowing,
+    EXISTS(SELECT * FROM followers WHERE vacationId = F.vacationId AND userId =?) AS isFollowing,
     COUNT(F.userId) AS followersCount,
     CONCAT( ?,imageName) AS imageName
     FROM vacations AS V LEFT JOIN followers AS F
