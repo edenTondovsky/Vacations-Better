@@ -82,8 +82,8 @@ router.get("/admin/vacations/images/:imageName", async (request: Request, respon
     }
 });
 
-// GET http://localhost:4001/api/admin/vacations/reports
-router.get("/admin/vacations/reports", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
+// GET http://localhost:4001/api/admin/vacations/report
+router.get("/admin/vacations/report", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const report = await adminVacationsService.getReport();
         response.json(report);

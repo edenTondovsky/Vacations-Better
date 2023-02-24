@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
-import AuthMenu from "../../authArea/AuthMenu/AuthMenu";
 import "./Home.css";
 
 function Home(): JSX.Element {
@@ -14,9 +13,7 @@ function Home(): JSX.Element {
 
             {!user && <>
 
-                <h2>For using  our website please Register 😉 </h2>
-
-                <br />
+                <h2>For using  our website please Register 😉</h2>
 
                 <div className="registerFirstDiv">
                     <NavLink to="/register">

@@ -6,11 +6,11 @@ import "./Layout.css";
 function Layout(): JSX.Element {
     return (
         <div className="Layout">
-
-
-            <header>
+            <nav>
                 <AuthMenu />
-                <Header/>
+            </nav>
+            <header>
+                <Header />
             </header>
 
             <main>

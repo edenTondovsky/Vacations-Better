@@ -92,7 +92,7 @@ function EditVacation(): JSX.Element {
                 <span className="Err">{formState.errors.price?.message}</span>
 
                 <label>Start Date</label>
-                <input type="date" min={new Date().toISOString().substring(0, 10)}  {...register("startDate", VacationModel.startDateValidation)} onChange={validateEndDate} />
+                <input type="date"  {...register("startDate", VacationModel.startDateValidation)} onChange={validateEndDate} />
                 <span className="Err">{formState.errors.startDate?.message}</span>
 
                 <label>End Date</label>

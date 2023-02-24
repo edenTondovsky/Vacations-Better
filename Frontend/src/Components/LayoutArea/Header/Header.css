@@ -4,5 +4,6 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    color: whitesmoke;
+    color: black;
+    margin-top: -25px;
 }

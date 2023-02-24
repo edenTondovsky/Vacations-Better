@@ -28,7 +28,6 @@ function AddVacation(): JSX.Element {
         }
     }
 
-
     // validate start date must be before end date
     const validateEndDate = (args: ChangeEvent<HTMLInputElement>) => {
         setStartDate(args.target.valueAsDate);
@@ -37,7 +36,6 @@ function AddVacation(): JSX.Element {
 
     return (
         <div className="AddVacation">
-
 
             <form onSubmit={handleSubmit(send)}>
                 <h2>Add vacation</h2>

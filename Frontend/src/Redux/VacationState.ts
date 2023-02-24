@@ -13,8 +13,7 @@ export enum vacationsActionType {
     AddVacation = "AddVacation",
     UpdateVacation = "UpdateVacation",
     DeleteVacation = "DeleteVacation",
-    FollowVacation = "FollowVacation",
-    UnFollowVacation = "UnFollowVacation",
+ 
     DeleteAll = "DeleteAll"
 }
 
@@ -33,6 +32,7 @@ export function vacationsReducer(currentState = new VacationState(), action: vac
         case vacationsActionType.FetchVacations:
             newState.vacations = action.payload;
             break;
+
         case vacationsActionType.AddVacation:
             newState.vacations.push(action.payload);
             break;
@@ -46,29 +46,16 @@ export function vacationsReducer(currentState = new VacationState(), action: vac
 
         case vacationsActionType.DeleteVacation:
             const indexToDelete = newState.vacations.findIndex(v => v.vacationId === action.payload);
-            if(indexToDelete >= 0){
-                newState.vacations.splice(indexToDelete ,1)
+            if (indexToDelete >= 0) {
+                newState.vacations.splice(indexToDelete, 1)
             }
             break;
 
-            case vacationsActionType.FollowVacation:
-                const indexToFollow = newState.vacations.findIndex(v => v.vacationId === action.payload.vacationId);
-                if(indexToFollow >= 0){
-                    newState.vacations[indexToFollow] = action.payload;
-                }
-                break;
 
-            case vacationsActionType.UnFollowVacation:
-                const indexToUnFollow = newState.vacations.findIndex(v=>v.vacationId === action.payload);
-                if(indexToUnFollow >= 0 ){
-                    newState.vacations.splice(indexToUnFollow ,1)
-                }
-                break;
-
-                case vacationsActionType.DeleteAll:
-                    newState.vacations = []; 
-
-            }
+        case vacationsActionType.DeleteAll:
+            newState.vacations = [];
+            break;
+    }
     return newState;
 }
 

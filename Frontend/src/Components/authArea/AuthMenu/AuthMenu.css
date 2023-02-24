@@ -3,3 +3,8 @@
 	justify-content: right;
     text-align: right;
 }
+ .AuthMenu .userName {
+    font-size: 20px;
+    color: black;
+    font-weight: bolder;
+ }

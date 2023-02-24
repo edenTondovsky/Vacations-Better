@@ -1,6 +1,5 @@
 import { Button, Checkbox } from '@mui/material';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { NavLink, useNavigate } from 'react-router-dom';
 import UserModel from '../../../Models/user-model';
@@ -12,19 +11,17 @@ import userVacationService from '../../../Services/UserVacationService ';
 import VacationsList from '../../VacationsArea/VacationsList/VacationsList';
 import "./Pagination.css";
 
-
-
 function Pagination(): JSX.Element {
 
+    const [user, setUser] = useState<UserModel>();
     const [vacations, setVacations] = useState<VacationModel[]>([]);
-    const [user, setUser] = useState<UserModel>(authStore.getState().user);
     const navigate = useNavigate();
 
     const [filterFollowed, setFilterFollowed] = useState<boolean>(false);
     const [hasNotStart, setIsStarted] = useState<boolean>(false);
     const [isOngoing, setIsOngoing] = useState<boolean>(false);
-    
-    
+
+
     const [startOffset, setStartOffset] = useState(0);
     const vacationsPerPage = 10;
 
@@ -44,7 +41,6 @@ function Pagination(): JSX.Element {
         setStartOffset(newOffset);
     };
 
-
     //filtered Vacation for user
     function filterVacations(vacations: VacationModel[]): VacationModel[] {
         if (filterFollowed) {
@@ -59,8 +55,18 @@ function Pagination(): JSX.Element {
         return vacations;
     }
 
+    useEffect(() => {
+        if (!authStore.getState().user) {
+            navigate("/home");
+        }
+        setUser(authStore.getState().user)
+    }, []);
+
     //handle vacation State and refresh
     useEffect(() => {
+
+        if (!authStore.getState().user) return;
+
         if (user && user.role === "Admin") {
             adminVacationService.getAllVacations();
             setVacations(vacationStore.getState().vacations);
@@ -74,17 +80,10 @@ function Pagination(): JSX.Element {
             vacationStore.subscribe(() => {
                 setVacations(filterVacations(vacationStore.getState().vacations));
             })
+
         }
+
     }, [filterFollowed, isOngoing, hasNotStart]);
-console.log(vacations);
-
-
-    useEffect(() => {
-        if(!authStore.getState().user) {
-            navigate("/home");
-        }
-        setUser(authStore.getState().user)
-    }, []);
 
     return (
         <>
@@ -114,11 +113,14 @@ console.log(vacations);
                     <Button variant="contained">Add vacation</Button>
                 </NavLink>
                 <br />
+
+                <NavLink to={'/reports'}>
+                    <div>Reoprt</div>
+                </NavLink>
             </div>}
 
+           
             < VacationsList vacations={currentVacations} />
-
-
 
             <ReactPaginate
                 breakLabel=""
@@ -126,7 +128,6 @@ console.log(vacations);
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
                 pageCount={pageCount}
-                previousLabel="previous"
                 renderOnZeroPageCount={null}
                 containerClassName="pagination"
                 activeClassName="active"

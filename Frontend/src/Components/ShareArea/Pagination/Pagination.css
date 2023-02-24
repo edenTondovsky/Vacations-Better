@@ -1,10 +1,19 @@
 .pagination {
     list-style: none;
 }
-.pagination li {
+.pagination li{
     display: inline-block;
-    background-color: #EEE;
     padding: 5px;
     margin: 5px;
     cursor: pointer;
+    background-color: gray;
+}
+
+.pagination li a {
+    color: wheat;
+    font-size: 24px;
+}
+.previous-page:hover,
+.next-page:hover {
+  background-color: black;
 }
