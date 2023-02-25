@@ -3,17 +3,24 @@
 }
 .pagination li{
     display: inline-block;
-    padding: 5px;
-    margin: 5px;
+    padding: 1px;
+    margin: 1px;
     cursor: pointer;
-    background-color: gray;
 }
 
 .pagination li a {
-    color: wheat;
+    color: lightpink;
     font-size: 24px;
 }
-.previous-page:hover,
-.next-page:hover {
-  background-color: black;
+
+.Pagination > button {
+    height: 100%;
+    width: 100%;
+    align-items: left;
+    text-align: left;
+}
+
+.pagination .reportLink{
+    text-align: left;
+    
 }

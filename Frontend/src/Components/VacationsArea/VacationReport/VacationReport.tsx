@@ -1,3 +1,4 @@
+import { sizing } from "@mui/system";
 import { BarElement, CategoryScale, Chart, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
@@ -12,19 +13,16 @@ function VacationReport(): JSX.Element {
 
     const [reportData, setReportData] = useState<ReportModel[]>([]);
 
-
-    // Get data for report and csv file
+    // Get data for report 
     useEffect(() => {
 
         // Use service func
         adminVacationService.getReport()
             .then(report => {
-
                 setReportData(report);
             })
             .catch(err => notify.error(err));
     }, []);
-
 
     Chart.register(
         CategoryScale,
@@ -37,19 +35,20 @@ function VacationReport(): JSX.Element {
 
     return (
         (reportData &&
-            <div >
-                <h1>Reports</h1>
+            <div className="VacationReport">
+                <h1>Report</h1>
 
-                <CSVLink data={reportData} filename={'followers_report.csv'}>
-                    <button className='Csv'>Download</button>
-                </CSVLink>
-<br/>
+                <div>
+                    <CSVLink data={reportData} className='csvFile' filename={'followers_report.csv'}>
+                        <button className="csvLink">Download</button>
+                    </CSVLink>
+                </div>
 
-                <NavLink to={"/vacations"}>
-                    <button>
-                        Back
-                    </button>
-                </NavLink>
+                <div>
+                    <NavLink to={"/vacations"}>
+                        <button className="backBtn">Back</button>
+                    </NavLink>
+                </div>
 
                 <Bar
                     data={{
@@ -57,9 +56,10 @@ function VacationReport(): JSX.Element {
                         datasets: [{
                             label: 'Followers Count',
                             data: reportData.map(data => data.followersCount),
-                            backgroundColor: 'rgba(75,192,192,1)',
+                            backgroundColor: 'rgb(255,182,193)',
                             borderColor: 'rgba(0,0,0,1)',
                             borderWidth: 1,
+
 
                         }]
                     }}
@@ -69,17 +69,13 @@ function VacationReport(): JSX.Element {
                             legend: { display: true, position: 'top' }
                         },
                         scales: {
-                            y: { beginAtZero: true, ticks: { color: 'red' } },
-                            x: { ticks: { color: 'white' } },
+                            y: { beginAtZero: true, ticks: { color: 'white', stepSize: 1 } },
+                            x: { ticks: { color: 'white', stepSize: 1 } },
                         },
                     }}
                 />
-
-          
             </div>)
     )
-
-
 }
 
 export default VacationReport;

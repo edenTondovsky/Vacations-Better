@@ -39,10 +39,12 @@ function Login(): JSX.Element {
                 <input type="password" {...register("password", CredentialsModel.passwordValidation)} />
                 <span className="Err">{formState.errors.password?.message}</span>
 
-                <button>Log in</button>
+                <button className="loginBtn">Log in</button>
+<br/>
+
 
                 <NavLink to="/home">
-                    <BottomNavigationAction label="Back" icon={<RestoreIcon />} />
+                    <button className="backBtn">back</button>
                 </NavLink>
             </form>
 

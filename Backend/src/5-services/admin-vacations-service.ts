@@ -21,11 +21,6 @@ async function getAllVacationsForAdmin(user: UserModel): Promise<VacationModel[]
 
 
 async function getOneVacation(vacationId: number): Promise<VacationModel> {
-    console.log("-------------------------------------");
-    console.log(vacationId);
-    
-    console.log("-------------------------------------");
-    
     const sql = `SELECT vacationId ,destination, description,startDate, endDate, price,
     CONCAT(?,imageName) AS imageName
     FROM vacations

@@ -18,6 +18,7 @@ function createNewToken(user: UserModel): string {
     // Create options:
     const options = { expiresIn: "3h" };
 
+
     // Create the token:
     const token = jwt.sign(container, secretKey, options);
 

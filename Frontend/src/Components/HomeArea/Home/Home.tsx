@@ -17,17 +17,16 @@ function Home(): JSX.Element {
 
                 <div className="registerFirstDiv">
                     <NavLink to="/register">
-                        <Button variant="contained">Register</Button>
+                        <button className="registerBtn">Register</button>
                     </NavLink>
                     <br />
                 </div>
 
                 <div className="alreadyRegisterDiv">
                     <span>registered user ?</span>
-                    <br />
-                    <br />
+                    <br/>
                     <NavLink to="/login">
-                        <Button variant="contained">Login</Button>
+                        <button className="loginBtn" >Login</button>
                     </NavLink>
                 </div>
 

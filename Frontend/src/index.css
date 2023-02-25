@@ -6,37 +6,18 @@ body,
     height: 100%;
     width: 100%;
     text-align: center;
-    font-size: large;
+    font-size: medium;
     background-image: url("Assets/Images/background.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 a {
     color: blue;
 }
-
-form {
-    display: inline-block;
-    width: 420px;
-    height: 520px;
-    text-align: left;
-    border: 2px solid;
-    margin: 5px;
-    margin-top: 0px;
-    padding: 10px;
-    border-color: white;
-    border-radius: 25px;
-    box-shadow: 10px 5px 8px lightyellow;
-    opacity: 0.8;
-    background-color: cornsilk;
-    color: black;
-    flex-wrap: initial;
-    font-size: 17px;
-}
-
 
 form>input,
 form>button {

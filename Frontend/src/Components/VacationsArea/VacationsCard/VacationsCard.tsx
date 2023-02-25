@@ -66,35 +66,18 @@ function VacationsCard(props: VacationsCardProps): JSX.Element {
         <div className="VacationsCard">
 
             <div>
-                <div>
-                    <img className="imageCard" src={props.vacation.imageName} /> </div>
-            </div>
+                {user?.role === "Admin" && <div className="addVacationLink">
+                    <div className="editAndDelete">
+                        <NavLink to={"/vacations/edit/" + props.vacation.vacationId}>✏️</NavLink>
+                        <NavLink to="#" onClick={() => { deleteVacation(props.vacation.vacationId) }}>❌</NavLink>
+                    </div>
+                </div>}
 
-            <div className="destnationProp">
-                {props.vacation.destination} <br></br>
-            </div>
-            <div className="priceProp">
-                {props.vacation.price}$ <br></br>
-            </div>
-            <div className="DateProp">
-                {new Date(props.vacation.startDate).toLocaleDateString("HE-IL").toString()}
-                {new Date(props.vacation.endDate).toLocaleDateString("HE-IL").toString()} <br></br>
-            </div>
-
-            <div className="descriptionProp">
-                {props.vacation.description} <br></br>
-            </div>
-
-            {user?.role === "Admin" && <div className="addVacationLink">
-                <NavLink to={"/vacations/edit/" + props.vacation.vacationId}>✏️</NavLink>
-                <NavLink to="#" onClick={() => { deleteVacation(props.vacation.vacationId) }}>❌</NavLink>
-                <br />
-            </div>}
-
-            <div className="followCard">
                 {user?.role === "User" && <div className="followDiv">
                     <Checkbox onChange={handleFollowChange} defaultChecked={isVacationFollowed}
                         sx={{
+                            display: 'flex', flexDirection: 'row',
+
                             color: pink[800],
                             '&.Mui-checked': {
                                 color: pink[600],
@@ -102,9 +85,27 @@ function VacationsCard(props: VacationsCardProps): JSX.Element {
                         }}
                         icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
                     {props.vacation.followersCount}
-                </div>
-                }
-            </div >
+                    <br />
+                </div>}
+
+                <div>
+                    <img className="imageCard" src={props.vacation.imageName} /> </div>
+            </div>
+
+            <div className="destinationProp">
+                {props.vacation.destination} <br></br>
+            </div>
+            <div className="priceProp">
+                {props.vacation.price}$ <br></br>
+            </div>
+            <div className="DateProp">
+                {new Date(props.vacation.startDate).toLocaleDateString("HE-IL").toString()} ⬅️
+                {new Date(props.vacation.endDate).toLocaleDateString("HE-IL").toString()} <br></br>
+            </div>
+
+            <div className="descriptionProp">
+                {props.vacation.description} <br></br>
+            </div>
         </div>
     );
 }

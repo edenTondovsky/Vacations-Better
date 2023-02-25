@@ -7,6 +7,7 @@ import appConfig from "../Utils/AppConfig";
 
 class AdminVacationService {
 
+
     //Get all vacations for Admin
     public async getAllVacations(): Promise<VacationModel[]> {
         let vacations = vacationStore.getState().vacations;
@@ -28,13 +29,11 @@ class AdminVacationService {
 
     //Add vacation and update redux
     public async addVacation(vacation: VacationModel): Promise<void> {
-        let vacations = vacationStore.getState().vacations;
-        if (vacations.length === 0) {
             const headers = { "Content-type": "multipart/form-data" }; // Tell axios that we sending text and file to backend
             const response = await axios.post<VacationModel>(appConfig.AdminVacationsUrl, vacation, { headers });
             const addedVacation = response.data;
             vacationStore.dispatch({ type: vacationsActionType.AddVacation, payload: addedVacation });
-        }
+        
         return this.getAllVacationsAndUpdateRedux();
     }
 

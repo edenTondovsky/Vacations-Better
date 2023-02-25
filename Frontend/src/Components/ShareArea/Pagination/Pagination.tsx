@@ -110,12 +110,12 @@ function Pagination(): JSX.Element {
 
             {user?.role === "Admin" && <div className="addLink">
                 <NavLink to="/vacations/new">
-                    <Button variant="contained">Add vacation</Button>
+                    <button className="addBtn">Add vacation</button>
                 </NavLink>
                 <br />
 
                 <NavLink to={'/reports'}>
-                    <div>Reoprt</div>
+                    <div>Report</div>
                 </NavLink>
             </div>}
 

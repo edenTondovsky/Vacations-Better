@@ -96,21 +96,21 @@ function EditVacation(): JSX.Element {
                 <span className="Err">{formState.errors.startDate?.message}</span>
 
                 <label>End Date</label>
-                <input type="date" min={startDate.toISOString().substring(0, 10)} {...register("endDate", VacationModel.endDateValidation)}  />
+                <input type="date" min={startDate.toISOString().substring(0, 10)} {...register("endDate", VacationModel.endDateValidation)} />
                 <span className="Err">{formState.errors.endDate?.message}</span>
 
                 <label>Image</label>
                 <input className="imageEdit" type="file" accept="image/*" {...register("image")}></input>
                 <span className="Err">{formState.errors.image?.message}</span>
 
-                <img src={vacation?.imageName}/>
+                <img src={vacation?.imageName} />
 
-
-                <NavLink to="/vacations">
-                    <BottomNavigationAction label="Back" icon={<RestoreIcon />} />
-                </NavLink>
 
                 <button>Edit Vacation</button>
+
+                <NavLink to="/vacations">
+                    <button>back</button>
+                </NavLink>
             </form>
         </div>
     );

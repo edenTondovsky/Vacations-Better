@@ -1,3 +1,31 @@
-.VacationReport {
-	height: 9999;
+.VacationReport>h1 {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+
+.VacationReport .csvLink {
+    border: 3px solid;
+    border-radius: 5px;
+    height: 100%;
+    width: 20%;
+    background-color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 15px;
+}
+
+.VacationReport .backBtn {
+    border: 3px solid;
+    border-radius: 5px;
+    height: 100%;
+    width: 10%;
+    background-color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 15px;
+
+}
+
+.VacationReport .backBtn:hover {
+    background-color: lightpink;
+}
+
+.VacationReport .csvLink:hover {
+    background-color: lightpink;
 }

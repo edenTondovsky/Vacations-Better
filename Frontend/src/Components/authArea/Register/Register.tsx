@@ -47,10 +47,10 @@ function Register(): JSX.Element {
                 <span className="Err">{formState.errors.password?.message}</span>
 
 
-                <button>Register</button>
-
+                <button className="registerBtn">Register</button>
+                <br />
                 <NavLink to="/home">
-                    <BottomNavigationAction label="Back" icon={<RestoreIcon />} />
+                    <button className="backBtn">back</button>
                 </NavLink>
             </form>
 
