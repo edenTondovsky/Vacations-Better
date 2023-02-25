@@ -1,10 +1,10 @@
-import {} from "../../../Assets/Images/not-found.jpeg";
+// import {} from "../../../Assets/Images/not-found.jpeg";
 import "./PageNotFound.css";
 
 function PageNotFound(): JSX.Element {
     return (
         <div className="PageNotFound">
-        <img src="../../../Assets/Images/not-found.jpeg"/>
+        {/* <img src="../../../Assets/Images/not-found.jpeg"/> */}
         </div>
 
     );
