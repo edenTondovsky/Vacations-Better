@@ -23,10 +23,6 @@ color: #ffb6c1;
     border-radius: 5px;
 }
 
- .AddVacation button:hover {
-    background-color: #ffb6c1;
- }
-
  .AddVacation input:hover{
     background-color:#dad1d3 ;
 }
@@ -35,7 +31,6 @@ color: #ffb6c1;
     height: 10%;
     width: 100%;
     overflow: auto;
-
 }
 
 .AddVacation textarea:hover { 

@@ -38,10 +38,6 @@
     font-size: large;
 }
 
-.Register button:hover {
-    background-color: #ffb6c1;
-}
-
 .Register .backBtn {
     margin-top: 20px;
     border-radius: 5px;

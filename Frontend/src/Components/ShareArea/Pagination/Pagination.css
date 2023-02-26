@@ -1,7 +1,8 @@
 .pagination {
     list-style: none;
 }
-.pagination li{
+
+.pagination li {
     display: inline-block;
     padding: 1px;
     margin: 1px;
@@ -13,14 +14,6 @@
     font-size: 24px;
 }
 
-.Pagination > button {
-    height: 100%;
-    width: 100%;
-    align-items: left;
-    text-align: left;
-}
 
-.pagination .reportLink{
-    text-align: left;
-    
-}
+
+

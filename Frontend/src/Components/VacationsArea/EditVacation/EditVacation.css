@@ -24,10 +24,6 @@
      border-radius: 5px;
  }
 
- .EditVacation button:hover {
-     background-color: #ffb6c1;
- }
-
  .EditVacation input:hover {
      background-color: #dad1d3;
  }

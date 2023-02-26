@@ -46,9 +46,6 @@ form>h2 {
     text-align: center;
 }
 
-.Login button:hover {
-    background-color: #ffb6c1;
-}
 .Login .backBtn {
     margin-top: 25px;
     border-radius: 5px;

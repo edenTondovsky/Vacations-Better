@@ -114,8 +114,9 @@ function Pagination(): JSX.Element {
                 </NavLink>
                 <br />
 
-                <NavLink to={'/reports'}>
-                    <div>Report</div>
+                <NavLink to={'/reports'} >
+                    <button className="addBtn">Report</button>
+                    
                 </NavLink>
             </div>}
 
@@ -130,7 +131,7 @@ function Pagination(): JSX.Element {
                 pageCount={pageCount}
                 renderOnZeroPageCount={null}
                 containerClassName="pagination"
-                activeClassName="active"
+                activeClassName='active'
 
             />
         </>

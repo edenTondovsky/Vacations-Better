@@ -34,6 +34,10 @@ function AddVacation(): JSX.Element {
     };
 
 
+
+    const startDateRegister = register("startDate", VacationModel.startDateValidation);
+    const imageRegister = register("image", VacationModel.imageValidation);
+
     return (
         <div className="AddVacation">
 
