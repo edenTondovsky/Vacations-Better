@@ -1,0 +1,19 @@
+.AuthMenu {
+
+justify-content: left;
+text-align: left;
+margin-left: 10px;
+}
+
+.AuthMenu .userName {
+    font-size: 20px;
+    color: lightpink;
+    font-weight: bolder;
+}
+
+.AuthMenu .logout {
+    margin-top: -50px;
+    margin-right: 10px;
+    text-align: right;
+    color: blue;
+}

@@ -1,0 +1,26 @@
+.Home {
+	color: rgba(255, 255, 255, 0.75);;  
+}
+  
+.Home .registerBtn {
+    height: 80px;
+    width: 250px;
+    font-size: x-large;
+    background-color:rgba(255, 255, 255, 0.75);
+    border-radius: 15px;
+}
+
+.Home > .alreadyRegisterDiv {
+    margin-top:380px;
+    font-size: x-large;
+}
+.Home .loginBtn{
+    border-radius: 15px;
+    margin-top: 15px;
+    height: 40px;
+    width: 150px;
+    font-size: large;
+    background-color:rgba(255, 255, 255, 0.75);
+
+}
+ 
